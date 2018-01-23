@@ -1,4 +1,4 @@
-module Interpreter (
+module Lib.Interpreter (
   whitespace,
   getOp,
   ignoreChars,
@@ -7,7 +7,7 @@ module Interpreter (
   eval,
   vbrain) where
 
-import Memory
+import Lib.Memory
 import Text.Parsec
 import Text.Parsec.String
 import Control.Monad.State
