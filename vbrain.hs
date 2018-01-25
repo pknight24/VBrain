@@ -1,6 +1,7 @@
 import Lib.Interpreter
 import Lib.Memory
 import Control.Monad
+import Text.Parsec
 
 main = forever $ do
   putStr "> "

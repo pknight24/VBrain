@@ -5,6 +5,7 @@ module Lib.Memory(
   goRight,
   incReg,
   decReg, 
+  isZero,
   ram
 ) where
 
@@ -59,6 +60,9 @@ incReg Null = Null
 decReg :: Memory -> Memory
 decReg (Register x left right) = (Register (x - 1) left right)
 decReg Null = Null
+
+isZero :: Memory -> Bool
+isZero m = (regVal m) == 0
 
 --starting point for all memory manipulation
 ram = (Register 0 Null Null)
