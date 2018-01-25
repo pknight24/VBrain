@@ -11,7 +11,7 @@ module Lib.Interpreter (
 import Lib.Memory
 import Text.Parsec
 import Text.Parsec.String
-import Control.Monad.State
+import System.IO.Unsafe
 
 --makes whitespace irrelevant
 whitespace :: Parser ()
@@ -22,7 +22,7 @@ getOp :: Parser Char
 getOp = do
   whitespace
   ignoreChars 
-  op <- oneOf "+-<>["
+  op <- oneOf "+-<>[.,"
   whitespace
   ignoreChars
   return op
@@ -34,7 +34,7 @@ getLoop = do
 
 
 --brainfuck ignores all characters that aren't operations
-ignoreChars = skipMany $ noneOf "+-<>[]"
+ignoreChars = skipMany $ noneOf "+-<>[].,"
 
 --functions that the op's correspond to 
 convertOp :: Char -> (Memory -> Memory)
@@ -42,6 +42,7 @@ convertOp '+' = incReg
 convertOp '-' = decReg
 convertOp '<' = goLeft
 convertOp '>' = goRight
+convertOp '.' = showMe
 
 --gets the resulting memory for the loop function
 loopResult :: Either ParseError Memory -> Memory
@@ -65,6 +66,7 @@ evalOp m = do
   op <- getOp
   case op of
     '[' -> initLoop m
+    ',' -> return m
     _   -> return ((convertOp op) m)
           
 
