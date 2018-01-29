@@ -6,16 +6,14 @@ Download with
 
 >git clone
 
-Then start a repl with
+Then, compile vbrain.hs with
 
->ghci
+>ghc --make
 
-and run
+and move it to your bin folder.
 
->:l vbrain.hs
+Use the executable by passing a file to it.
 
-To interpret a line of brainf-, pass a string to the 'vbrain' function. Example:
+>vbrain file.bf
 
->vbrain "++>++[>+++<-]"
-
-The repl will then print the results.
+This will interpret "file.bf" and print the output to stdout.
